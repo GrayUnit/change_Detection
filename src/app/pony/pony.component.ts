@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-pony',
@@ -9,10 +11,14 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class PonyComponent implements OnInit {
 
   @Input() ponyModel;
+  public color$: Observable<string>;
 
-  constructor() { }
+  constructor(
+    private colorService: ColorService
+  ) { }
 
   ngOnInit(): void {
+    this.color$ = this.colorService.getColor();
   }
 
   public check() {
